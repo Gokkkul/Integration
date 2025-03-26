@@ -1,7 +1,7 @@
 <div class="container my-5 py-5 w-50 border rounded">
 
     <h3 class="heading text-center">Login</h3>
-      <form [formGroup]="loginForm">
+      <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
   
           <!-- <div class="form-group m-3">
               <input type="text" name="name" id="name" formControlName="fullName" placeholder="Enter Full Name" class="form-control">
@@ -20,7 +20,7 @@
             </div><br>
 
             <div class="col text-center">
-                <p>Not Registered? Click here to <a style="text-decoration: none;" class="link-primary" routerLink="/user/register">Register</a> </p>
+                <p>Not Registered? Click here to <a style="text-decoration: none;" class="link-primary" routerLink="user/register">Register</a> </p>
               </div>
       
       </form>

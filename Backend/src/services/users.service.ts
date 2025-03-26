@@ -5,14 +5,14 @@ import * as bcrypt from 'bcrypt'
 const userRepo = new UserRepository();
 
 export class UserService {
-  async addUser(user: Partial<User>) {
-    try {
-      const result = await userRepo.addUser(user);
-      return result;
-    } catch (error) {
-      return `Error: ${error}`;
-    }
-  }
+  // async addUser(user: Partial<User>) {
+  //   try {
+  //     const result = await userRepo.addUser(user);
+  //     return result;
+  //   } catch (error) {
+  //     return `Error: ${error}`;
+  //   }
+  // }
 
   async updateUser(id: number, user: Partial<User>) {
     try {
@@ -50,10 +50,16 @@ export class UserService {
 
   async registerUser(user: Partial<User>) {
     try {
-      const hashedPassword = await bcrypt.hash(user.password!, 10); // Hash password with salt rounds
-      user.password = hashedPassword;
-      const result = await userRepo.registerUser(user);
-      return result;
+      if (user.password) {
+        const hashedPassword = await bcrypt.hash(user.password, 10); // Hash password with salt rounds
+        user.password = hashedPassword;
+        console.log(user);
+        
+        const result = await userRepo.registerUser(user);
+        console.log(result);
+
+        return result;
+      }
     } catch (error) {
       return `Error: ${error}`;
     }

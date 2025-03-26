@@ -7,10 +7,10 @@ export class UserController {
   addUser = async (req: Request, res: Response) => {
     try {
       const data = req.body;
-      const user = await userService.addUser(data);
+      // console.log(data);
+      const user = await userService.registerUser(data);
       res.status(201).json(user);
-      res.json({ Message: `User Added Successfully...!` });
-      return
+
     } catch (error) {
         res.json({Message: `${error}`})
     }
@@ -42,7 +42,7 @@ export class UserController {
     try {
         const user =  await userService.getAllUser();
         res.status(201).json(user);
-        return
+        return 
     } catch (error) {
         res.json({Message: `${error}`})
     }
@@ -53,10 +53,16 @@ export class UserController {
         const id = Number(req.params.id)
         const user = await userService.getUsersById(id);
         res.status(201).json(user);
-        return
+        return 
     } catch (error) {
         res.json({Message: `${error}`})
     }
   };
+
+  async loginUser(req:Request, res:Response){
+    const data = req.body
+    const result = await userService.loginUser(data.email,data.password);
+    res.json(result);
+  }
 
 }

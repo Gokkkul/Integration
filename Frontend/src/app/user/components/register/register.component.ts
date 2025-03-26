@@ -14,15 +14,15 @@ export class RegisterComponent {
   constructor(private authService: AuthService){}
 
   registerForm:FormGroup = new FormGroup({
-    fullName: new FormControl(''),
+    fullname: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl('')
   })
 
   userRegistration(){
-    this.authService.userRegistration(this.registerForm.value).subscribe(() => {
-    console.log('Registration Successful...!');
-    console.log(this.registerForm.value);
+    this.authService.userRegistration(this.registerForm.value).subscribe((item) => {
+    alert('Registration Successful...!');
+    console.log(item);
       
       
     })

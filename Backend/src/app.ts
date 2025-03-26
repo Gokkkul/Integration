@@ -4,6 +4,7 @@ import { Response, Request } from 'express';
 import { AppDataSource } from './config/data-source';
 import { User } from './entities/user.entity';
 import { UserController } from './controllers/users.controller';
+import { userRouter } from './routes/user.routes';
 const userController = new UserController()
 
 
@@ -20,6 +21,7 @@ app.use(cors());
 app.get('/', (req: Request, res: Response) => {
     res.json({message: "Hello from Backend...!"})
 })
+app.use('/user',userRouter)
 
 app.listen(3000,() => {
     console.log(`Server started...!`);

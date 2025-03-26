@@ -12,5 +12,6 @@ router.delete('/delete-user', userController.deleteUser);
 router.post('/update-user', userController.updateUser);
 router.get('/get-users', jwtAuth,userController.getAllUsers);
 router.get('/get-user/:id', userController.getUsersById);
+router.post('/login',userController.loginUser);
 
 export{router as userRouter }

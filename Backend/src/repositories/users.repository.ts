@@ -8,11 +8,11 @@ dotenv.config()
 export class UserRepository{
     private appDataSource = AppDataSource.getRepository(User);
 
-    async addUser(user: Partial<User>){
-        const result = await this.appDataSource.create(user);
-        await this.appDataSource.save(result);
-        return `User added successfully...!`
-    }
+    // async addUser(user: Partial<User>){
+    //     const result = await this.appDataSource.create(user);
+    //     await this.appDataSource.save(result);
+    //     return `User added successfully...!`
+    // }
 
     async getAllUsers(){
         const result = await this.appDataSource.find();
@@ -41,12 +41,12 @@ export class UserRepository{
 
     async loginUser(email: string, password: string) {
         const user = await this.appDataSource.findOne({ where: { email } });
-        if (user) {
+        if (user?.email) {
             const isPasswordValid = await bcrypt.compare(password, user.password!); // Compare hashed password
             if (isPasswordValid) {
                 const secret = process.env.SECRET_KEY || 'lavanya'
                 const token = await jwt.sign({email,password},secret)
-                return `User logged in successfully! token: ${token}` ;
+                return {message:"User logged in successfully!" , token: token} ;
             } else {
                 return `Invalid credentials!`;
             }
